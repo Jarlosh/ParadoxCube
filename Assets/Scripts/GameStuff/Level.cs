@@ -1,21 +1,19 @@
-﻿using Assets.GameStuff;
-using Assets.Managers;
-using Assets.Tiles;
-using DG.Tweening;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Assets.GameStuff;
+using Assets.Managers;
+using GameStuff.Tiles;
+using Managers;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-namespace Assets.Scripts.GameStuff
+namespace GameStuff
 {
     public class Level
     {
         private int levelIndex;
-        private int x_size;
-        private int z_size;
+        private int xSize;
+        private int zSize;
         private Vector3 levelSizeVect;
 
 
@@ -55,11 +53,11 @@ namespace Assets.Scripts.GameStuff
             
         }
 
-        public void SetLevelSize(int level_dx, int level_dy, int level_dz)
+        public void SetLevelSize(int levelDx, int levelDy, int levelDz)
         {
-            x_size = level_dx;
-            z_size = level_dz;
-            levelSizeVect = new Vector3(level_dx, level_dy, level_dz);
+            xSize = levelDx;
+            zSize = levelDz;
+            levelSizeVect = new Vector3(levelDx, levelDy, levelDz);
             //floorOffset = levelIndex - (BlockSize.y / 2);
         }
 
@@ -68,8 +66,8 @@ namespace Assets.Scripts.GameStuff
             var map = proto.map;
             SetLevelSize(map.GetLength(0), 0, map.GetLength(1));
 
-            for (var z = 0; z < z_size; z++)
-                for (var x = 0; x < x_size; x++)
+            for (var z = 0; z < zSize; z++)
+                for (var x = 0; x < xSize; x++)
                     tileResolvers[map[x, z]](x, z);
 
             shadowBorder = MakeShadowCrutches();
@@ -112,10 +110,10 @@ namespace Assets.Scripts.GameStuff
         void ResolveFloor(int x, int z)
         {
             var block = SpawnAt(ResMan.Instance.floorPrefab, x, levelIndex - 1, z);
-            var block_life = block.GetComponent<FloorLife>();
-            block_life.activeColor = mainColor;
-            block_life.onActivate += ResolveActivation;
-            floors.Add(block_life);
+            var blockLife = block.GetComponent<FloorLife>();
+            blockLife.activeColor = mainColor;
+            blockLife.onActivate += ResolveActivation;
+            floors.Add(blockLife);
         }
 
         void ResolvePlayer(int x, int z)
@@ -134,7 +132,7 @@ namespace Assets.Scripts.GameStuff
 
         public void CompleteLevel()
         {
-            /// Meh, no animation looks betta than any --Jarl
+            // Meh, no animation looks betta than any --Jarl
             #region Unused "fancy" level change
             //foreach (var floor in floors)
             //{
@@ -158,7 +156,7 @@ namespace Assets.Scripts.GameStuff
             //}
             #endregion
             //KillShadowBorder();
-            GameObject.Destroy(container);
+            Object.Destroy(container);
         }
 
 
@@ -185,7 +183,7 @@ namespace Assets.Scripts.GameStuff
         GameObject SpawnAt(GameObject prefab, float x, float y, float z, Quaternion quaternion)
         {
             var pos = GetBlockPos(x, y, z);
-            var obj = GameObject.Instantiate(prefab, pos, quaternion, container.transform);
+            var obj = Object.Instantiate(prefab, pos, quaternion, container.transform);
             return obj;
         }
         #endregion
@@ -204,12 +202,12 @@ namespace Assets.Scripts.GameStuff
         float shadowCrutchZsize = 5;
 
         void KillShadowBorder() => 
-            shadowBorder.ForEach(g => GameObject.Destroy(g));
+            shadowBorder.ForEach(Object.Destroy);
 
         List<GameObject> MakeShadowCrutches()
         {
-            var a = x_size / 2;
-            var b = z_size / 2;
+            var a = xSize / 2;
+            var b = zSize / 2;
             var c = shadowCrutchXsize / 2;
             var d = shadowCrutchZsize / 2;
 
@@ -217,7 +215,7 @@ namespace Assets.Scripts.GameStuff
             var deltas = new int[] { -1, 1 };
             var cornerCrutchSize = new Vector3(2 * c, 1, 2 * d);
 
-            var borderY = levelIndex + 0.5f;
+            var borderY = levelIndex + ResMan.Instance.wallPrefab.transform.localScale.y / 2;
             foreach (var dx in deltas)
                 foreach (var dz in deltas)
                 {
@@ -234,8 +232,8 @@ namespace Assets.Scripts.GameStuff
             return crutches;
         }
 
-        GameObject SpawnBorderCrutch(float y, float x, float z, float x_size, float z_size)
-            => SpawnCrutch(new Vector3(x, y, z), new Vector3(x_size, 1, z_size));
+        GameObject SpawnBorderCrutch(float y, float x, float z, float xCrutchSize, float zCrutchSize)
+            => SpawnCrutch(new Vector3(x, y, z), new Vector3(xCrutchSize, 1, zCrutchSize));
         GameObject SpawnCrutch(Vector3 position, Vector3 size)
         {
             var crutch = GameObject.CreatePrimitive(PrimitiveType.Plane);

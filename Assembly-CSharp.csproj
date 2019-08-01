@@ -77,12 +77,14 @@
     <Compile Include="Assets\OldTouch\InputHelper.cs" />
     <Compile Include="Assets\OldTouch\SwipeManager.cs" />
     <Compile Include="Assets\OldTouch\TouchCreator.cs" />
+    <Compile Include="Assets\Rotate.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Level.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Protos\LevelPrototype.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Protos\ProtoCollection.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Tiles\FakeWallLife.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Tiles\FloorLife.cs" />
     <Compile Include="Assets\Scripts\GameStuff\Tiles\WallLife.cs" />
+    <Compile Include="Assets\Scripts\GUI\Gui.cs" />
     <Compile Include="Assets\Scripts\Managers\AbcManager.cs" />
     <Compile Include="Assets\Scripts\Managers\BootStrapper.cs" />
     <Compile Include="Assets\Scripts\Managers\MapMan.cs" />
@@ -98,7 +100,25 @@
     <Compile Include="Assets\Scripts\Touch\JInputHelper.cs" />
     <Compile Include="Assets\Scripts\Touch\JSwipeManager.cs" />
     <Compile Include="Assets\Scripts\Touch\JTouchCreator.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\DOTween\readme.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -144,6 +164,9 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
@@ -152,9 +175,6 @@
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/Jarl/Desktop/UnityProjects/Paradox Cube/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

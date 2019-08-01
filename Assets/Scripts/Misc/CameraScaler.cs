@@ -1,37 +1,38 @@
 ﻿using System;
 using UnityEngine;
 
-public class CameraScaler : MonoBehaviour
+namespace Misc
 {
-    public Vector2 ReferenceResolution = new Vector2(9, 16);
-    public Vector3 ZoomFactor = Vector3.one;
-
-
-    [HideInInspector]
-    public Vector3 OriginPosition;
-
-    void Start()
+    public class CameraScaler : MonoBehaviour
     {
-        OriginPosition = transform.position;
-        UpdateResolution();
-    }
+        public Vector2 referenceResolution = new Vector2(9, 16);
+        public Vector3 zoomFactor = Vector3.one;
 
-    void Update()
-    {
-        //UpdateResolution();
-    }
 
-    void UpdateResolution()
-    {
-        if (ReferenceResolution.y == 0 || ReferenceResolution.x == 0)
-            throw new ArgumentException();
+        [HideInInspector]
+        public Vector3 originPosition;
 
-        var refRatio = ReferenceResolution.x / ReferenceResolution.y;
-        var ratio = (float)Screen.width / (float)Screen.height;
+        void Start()
+        {
+            originPosition = transform.position;
+            UpdateResolution();
+        }
 
-        transform.position = OriginPosition + transform.forward * (1f - refRatio / ratio) * ZoomFactor.z
-                                            + transform.right * (1f - refRatio / ratio) * ZoomFactor.x
-                                            + transform.up * (1f - refRatio / ratio) * ZoomFactor.y;
+        void Update()
+        {
+            //UpdateResolution();
+        }
 
+        void UpdateResolution()
+        {
+            var refRatio = referenceResolution.x / referenceResolution.y;
+            var ratio = (float)Screen.width / (float)Screen.height;
+
+            var t = transform;
+            t.position = originPosition + (1f - refRatio / ratio) * zoomFactor.z * t.forward
+                                        + (1f - refRatio / ratio) * zoomFactor.x * t.right
+                                        + (1f - refRatio / ratio) * zoomFactor.y * t.up;
+
+        }
     }
 }
