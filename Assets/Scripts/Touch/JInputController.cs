@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 
 
 namespace Assets.TouchStuff
@@ -48,7 +49,7 @@ namespace Assets.TouchStuff
 
         void HandleLongPress(SwipeAction swipeAction)
         {
-            Debug.LogFormat("HandleLongPress: {0}", swipeAction);
+            MapMan.Instance.SwitchLevel();
         }
     }
 

@@ -19,7 +19,8 @@ namespace Assets.GameStuff
     {
         public TileType[,] map;
         public int index;
-
+        private int maxWidth = 9;
+        
         public LevelPrototype(int[,] readed, int index = 0)
         {
             map = Tools.CastArr(readed, v => (TileType)v);
@@ -50,6 +51,7 @@ namespace Assets.GameStuff
             {1, 1, 1, 3, 3, 3, 3, 3, 3}
         };
 
+
         public static LevelPrototype GetDefaultProto() => new LevelPrototype(defaultLevel);
         public static LevelPrototype GetSmallProto() => new LevelPrototype(smallLevel);
 
@@ -72,15 +74,22 @@ namespace Assets.GameStuff
 
         public void RotateMe(int nightyDegreesCoeff=-1)
         {
+            if (nightyDegreesCoeff == -1)
+            {
+                var height = map.GetLength(1);
+                var canBeTransponed = height <= maxWidth;
+
+                if (canBeTransponed)
+                    nightyDegreesCoeff = Random.Range(0, 4);
+                else
+                    nightyDegreesCoeff = 0;
+            }
             map = RotateLevel(map, nightyDegreesCoeff);
         }
         
         #region Rotating levels
-        public static TileType[,] RotateLevel(TileType[,] level, int nightyDegreesCoeff=-1)
+        public static TileType[,] RotateLevel(TileType[,] level, int nightyDegreesCoeff)
         {
-            if (nightyDegreesCoeff == -1)
-                nightyDegreesCoeff = Random.Range(0, 4);
-            Debug.Log(nightyDegreesCoeff);
             switch (nightyDegreesCoeff % 4)
             {
                 case 0: return level;
