@@ -8,11 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rotate))]
 public class Player : MonoBehaviour
 {
-    public GameObject shell;
     public GameObject kernel;
-    public GameObject engine;
+    public ParticleSystem engine;
+
+    private Transform engineTransform;
     
-    private Material shellMat;
     private Material kernelMat;
     private Rotate chiller;
 
@@ -34,15 +34,22 @@ public class Player : MonoBehaviour
         public float scaleCoefficient;
 
 
+        
     public void Awake()
     {
         layerMask = LayerMask.GetMask("Wall");
-        shellMat = shell.GetComponent<Renderer>().material;
         kernelMat = kernel.GetComponent<Renderer>().material;
+        engineTransform = engine.transform;
 
         chiller = GetComponent<Rotate>();
+        engine.transform.parent = null;
     }
 
+    public void Update()
+    {
+        engineTransform.position = transform.position;
+    }
+    
     #region Controlled move
     public void MoveControlled(Vector3 direction)
     {
@@ -132,11 +139,11 @@ public class Player : MonoBehaviour
     
     
     # region Switch level
-    public void MoveToLevel(Vector3 startPos)
+    public void MoveToLevel(Vector3 startPos, float getToDuration, float getIntoDuration)
     {
         StartSwitching();
-        var upper = transform.DOMove(startPos + Vector3.up, .5f);
-        var lower = transform.DOMove(startPos, .25f);
+        var upper = transform.DOMove(startPos + Vector3.up, getToDuration);
+        var lower = transform.DOMove(startPos, getIntoDuration);
 
         curMoveTween = DOTween.Sequence()
             .Append(upper)
@@ -161,15 +168,35 @@ public class Player : MonoBehaviour
     
 
     # region Coloring materials
+    
+    public void SetBurstColor(Color color)
+    {
+        var main = engine.main;
+        DOTween.To(() => main.startColor.color, v => main.startColor = v, color, 1);
+        main.startColor = color;
+    }
+    
+    public Color MakeDarkColor(Color color, float power = 1f/4)
+    {
+        float hue, sat, val;
+        Color.RGBToHSV(color, out hue, out sat, out val);
+        sat = Mathf.Max(0, sat - power/4);
+        val = Mathf.Max(0, val - power);
+        return Color.HSVToRGB(hue, sat, val);
+    }
+    
     public void ChangeColor(Color color, float duration = 1)
     {
-        var shellColor = color;
-        shellColor.a = ResMan.Instance.playerShellOpacity;
+        //var shellColor = color;
+        //shellColor.a = ResMan.Instance.playerShellOpacity;
 
-        var kernelColor = color;
+        //var kernelColor = color;
 
-        shellMat.DOColor(shellColor, duration);
-        kernelMat.DOColor(kernelColor, duration);
+        //shellMat.DOColor(shellColor, duration);
+        
+        
+        kernelMat.DOColor(color, duration);
+        SetBurstColor(MakeDarkColor(color));
     }
     # endregion
 

@@ -369,7 +369,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.85186e-34, y: 2.5849394e-26, z: 2.3509887e-38, w: 4.5918e-41}
+  m_BoundingSphereOverride: {x: 1.9827168e+14, y: -2.1812816e+17, z: 1.5449696e+9,
+    w: 4e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -502,6 +503,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBoxes:
   - {fileID: 1226867654}
+  buttons:
+  - {fileID: 827801791}
   fadeDuration: 1
 --- !u!4 &397032821 stripped
 Transform:
@@ -664,7 +667,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 204253174}
-        m_MethodName: Honk
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -877,24 +880,6 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 3039664733424766980}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1370641188 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 523191379460745821, guid: 6184c1edbc06079429675d734088d28c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3039664733424766980}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1370641192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370641188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a08022b57dcdd84d868855f025985a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1392433862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.22400004, b: 0.40127635, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1140,27 +1125,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1296643345, guid: 6184c1edbc06079429675d734088d28c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 677933949020099211, guid: 6184c1edbc06079429675d734088d28c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 677933949020099211, guid: 6184c1edbc06079429675d734088d28c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 677933949020099211, guid: 6184c1edbc06079429675d734088d28c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 523191379460745821, guid: 6184c1edbc06079429675d734088d28c,
-        type: 3}
-      propertyPath: m_IsActive
+      propertyPath: updatingRuntime
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

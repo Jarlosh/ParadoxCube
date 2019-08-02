@@ -16,8 +16,11 @@ namespace Managers
         public Transform chillPosition;
         
         public Camera gameCamera;
-        
-        private Vector3 cameraDeltaPosition;
+
+        public float moveToLevelDuration = 0.75f;
+        public float moveIntoLevelDuration = 0.25f;
+
+        private float playerColorLighting = 1f/6;
 
         Player player;
         Level currentLevel;
@@ -44,10 +47,11 @@ namespace Managers
                 .GetComponent<Player>();
             
             player.transform.position = chillPosition.position; 
+            if(currentLevel != null) 
+                PaintPlayerToLevelColor(currentLevel);
             MakePlayerStartChill();
             
-            //FixCamera();
-
+            
         }
 
         void MakePlayerStartChill()
@@ -59,12 +63,13 @@ namespace Managers
         void MakePlayerStopChill(Transform newParent=null)
         {
             player.transform.parent = newParent;
+            player.StopChill();
         }
         
-        public void MovePlayerToLevel(Level level)
+        public void MovePlayerToLevel(Level level, float moveToDuration, float moveIntoDuration)
         {
-            player.MoveToLevel(LevelStartPosition(level));
-            player.ChangeColor(LightUp(level.mainColor, 1f/6));
+            player.MoveToLevel(LevelStartPosition(level), moveToDuration, moveIntoDuration);
+            PaintPlayerToLevelColor(level);
         }
         
         
@@ -72,13 +77,28 @@ namespace Managers
         
         #endregion
 
+
+        public void PrepareToStart()
+        {
+            MakePlayerStopChill();   
+        }
+        
+        
+        
+        public void StartGame()
+        {
+            InitLevel(currentLevel);
+            MovePlayerToLevel(currentLevel, 
+                moveToLevelDuration, 
+                moveIntoLevelDuration);
+        }
         
         #region Game state control
         
         public void StartStuff()
         {
-            //currentLevel = MakeLevel(0);
-            //nextLevel = MakeLevel(1);
+            currentLevel = MakeLevel(0);
+            nextLevel = MakeLevel(1);
             lastIndex = 1;
 
             MakePlayer(currentLevel);
@@ -96,7 +116,7 @@ namespace Managers
             currentLevel = nextLevel;
             nextLevel = newLevel;
 
-            MovePlayerToLevel(currentLevel);
+            MovePlayerToLevel(currentLevel, moveToLevelDuration, moveIntoLevelDuration);
             InitLevel(currentLevel);
 
             MoveCamera();
@@ -137,8 +157,11 @@ namespace Managers
             var c = Color.HSVToRGB(hue, sat, val);
             return c;
         }
-        
-        
+
+        void PaintPlayerToLevelColor(Level level)
+        {
+            player.ChangeColor(LightUp(level.mainColor, playerColorLighting));
+        }
         
         public Color LightUp(Color color, float power = 1f/4)
         {
@@ -156,7 +179,7 @@ namespace Managers
         #endregion
         
         
-        #region Level tools
+        # region Level tools
         
         Level MakeLevel(int levelIndex)
         {
@@ -181,7 +204,7 @@ namespace Managers
                    level.startPos +
                    new Vector3(1f, 0, 1f) / 2;
         }
-        #endregion
+        # endregion
         
 
 

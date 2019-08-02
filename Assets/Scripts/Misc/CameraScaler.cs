@@ -7,7 +7,7 @@ namespace Misc
     {
         public Vector2 referenceResolution = new Vector2(9, 16);
         public Vector3 zoomFactor = Vector3.one;
-
+        public bool updatingRuntime = true;
 
         [HideInInspector]
         public Vector3 originPosition;
@@ -20,7 +20,8 @@ namespace Misc
 
         void Update()
         {
-            //UpdateResolution();
+            if(updatingRuntime)
+                UpdateResolution();
         }
 
         void UpdateResolution()

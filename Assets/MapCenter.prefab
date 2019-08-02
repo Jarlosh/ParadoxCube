@@ -264,9 +264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca78d21e911184141ae79a74cd262720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceResolution: {x: 9, y: 16}
-  ZoomFactor: {x: 0, y: 0.6, z: 27}
-  OriginPosition: {x: -0.011854649, y: 27.680122, z: -16.175133}
+  referenceResolution: {x: 9, y: 16}
+  zoomFactor: {x: 1, y: 1, z: 1}
+  updatingRuntime: 0
+  originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &523191379460745821
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,13 +279,14 @@ GameObject:
   - component: {fileID: 677933949020099211}
   - component: {fileID: 2750308650839508671}
   - component: {fileID: 2798495397748236263}
+  - component: {fileID: 1370641192}
   m_Layer: 0
   m_Name: PlayerChillPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &677933949020099211
 Transform:
   m_ObjectHideFlags: 0
@@ -293,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523191379460745821}
   m_LocalRotation: {x: -0.6427876, y: -0, z: -0, w: 0.7660445}
-  m_LocalPosition: {x: 0, y: 0.22978401, z: 28.738827}
+  m_LocalPosition: {x: -0.06, y: 0.7, z: 10.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1296643341}
@@ -345,6 +347,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1370641192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523191379460745821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a08022b57dcdd84d868855f025985a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3039664733821791600
 PrefabInstance:
   m_ObjectHideFlags: 0

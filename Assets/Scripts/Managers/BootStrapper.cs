@@ -17,8 +17,8 @@ namespace Managers
         {
             DontDestroyOnLoad(this);
             // WAKE UP U MONKEY, U'LL BE LATE FOR WORK 
-            if (!MapMan.IsReady) Instantiate(mapManager); 
-            if (!ResMan.IsReady) Instantiate(resManager);
+            //if (!MapMan.IsReady) Instantiate(mapManager); 
+            //if (!ResMan.IsReady) Instantiate(resManager);
 
             MakeUpScreen();
             StartSimulation();

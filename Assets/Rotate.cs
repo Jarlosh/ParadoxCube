@@ -20,7 +20,7 @@ public class Rotate : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(Flip);
     }
-
+    
     public void GoChill()
     {
         flipping?.Kill();
