@@ -1,9 +1,7 @@
 ﻿using Assets.Misc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.GameStuff
 {
@@ -65,5 +63,65 @@ namespace Assets.GameStuff
             throw new NotImplementedException();
 
         }
+
+        public LevelPrototype Rotated(int nightyDegreesCoeff=-1)
+        {
+            RotateMe(nightyDegreesCoeff);
+            return this;
+        }
+
+        public void RotateMe(int nightyDegreesCoeff=-1)
+        {
+            map = RotateLevel(map, nightyDegreesCoeff);
+        }
+        
+        #region Rotating levels
+        public static TileType[,] RotateLevel(TileType[,] level, int nightyDegreesCoeff=-1)
+        {
+            if (nightyDegreesCoeff == -1)
+                nightyDegreesCoeff = Random.Range(0, 4);
+            Debug.Log(nightyDegreesCoeff);
+            switch (nightyDegreesCoeff % 4)
+            {
+                case 0: return level;
+                case 1: return TransponeLevel(FlipLevelVert(level));
+                case 2: return FlipLevelVert(FlipLevelHor(level));
+                case 3: return TransponeLevel(FlipLevelHor(level));;
+                default: throw new ArgumentException(); 
+            }
+        }
+
+        public static T[,] FlipLevelHor<T>(T[,] level)
+        {
+            var width = level.GetLength(0);
+            var height = level.GetLength(1);
+            var res = new T[width, height];
+            for(var x = 0; x < width; x++)
+                for (var y = 0; y < height; y++)
+                    res[x, y] = level[width - x - 1, y];
+            return res;
+        }
+        public static T[,] FlipLevelVert<T>(T[,] level)
+        {
+            var width = level.GetLength(0);
+            var height = level.GetLength(1);
+            var res = new T[width, height];
+            for(var x = 0; x < width; x++)
+                for (var y = 0; y < height; y++)    
+                    res[x, y] = level[x, height - 1 - y];
+            return res;
+        }
+
+        public static T[,] TransponeLevel<T>(T[,] level)
+        {
+            var width = level.GetLength(0);
+            var height = level.GetLength(1);
+            var res = new T[height, width];
+            for(var x = 0; x < width; x++)
+                for (var y = 0; y < height; y++)
+                    res[y, x] = level[x, y];
+            return res;
+        }
+        #endregion
     }
 }

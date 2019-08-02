@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.GameStuff.Protos
@@ -75,6 +76,9 @@ namespace Assets.Scripts.GameStuff.Protos
             }
         }
 
+        
+        
+        
         public static TileType[,] StringLevelToProtoMap(string level)
         {
             var strs = level.Split('\n');
@@ -117,5 +121,6 @@ namespace Assets.Scripts.GameStuff.Protos
             return StringLevelToProto(level, index);
         }
 
+        
     }
 }

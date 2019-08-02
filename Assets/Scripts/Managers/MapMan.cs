@@ -185,8 +185,7 @@ namespace Managers
         {
             try
             {
-                var proto = ProtoCollection.GetRandomProto();
-                //Debug.LogFormat("Proto {0} loaded", proto.index);
+                var proto = ProtoCollection.GetRandomProto().Rotated();
                 var level = new Level(proto, -levelIndex, MakeColor());
                 return level;
             }
