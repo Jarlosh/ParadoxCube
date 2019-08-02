@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   referenceResolution: {x: 9, y: 16}
-  zoomFactor: {x: 1, y: 1, z: 1}
+  zoomFactor: {x: 0, y: 0, z: 40}
   updatingRuntime: 0
   originPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &523191379460745821
